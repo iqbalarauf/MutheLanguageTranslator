@@ -58,20 +58,60 @@
             margin-top: 20px;
             color: #333;
         }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h3 {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #555;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            background-color: #777;
+        }
     </style>
 </head>
 
 <body>
+    <header>
+        <h3>MRTJam7Lewat12 | Iqbal AR</h3>
+
+        <nav>
+            <a href="botoniel.iqbalarauf.my.id">BotOniel on Telegram</a>
+            <a href="x.com/mrtjam7lewat12">X Account</a>
+        </nav>
+    </header>
 
     <h2>Penerjemah Bahasa Umandana</h2>
-    <h5>dibuat oleh <a href="https://x.com/mrtjam7lewat12">@MRTJam7Lewat12</a></h5>
+    <h5>dibuat oleh <a href="https://x.com/mrtjam7lewat12" target=”_blank”>@MRTJam7Lewat12</a></h5>
 
     <textarea type="text" id="kalimatInput" placeholder="Masukkan kalimat bahasa Indonesia"></textarea>
     <br><br>
-    <input type="radio" id="pilihanFungsi" name="fav_language" value="indoumandana">
-    <label for="pilihanFungsi">Indonesia - Bhs.Umandana</label>
+    
+    <form>
+    <input type="radio" id="pilihanFungsi" name="fav_language" value="indoumandana" checked>
+    <label for="indoumandana">Indonesia - Bhs.Umandana</label><br>
     <input type="radio" id="pilihanFungsi" name="fav_language" value="umandanaindo">
-    <label for="pilihanFungsi">Bhs.Umandana - Indonesia</label>
+    <label for="umandanaindo">Bhs.Umandana - Indonesia</label>
+    </form>
+
     <br><br>
     <button onclick="jalankanFungsi()">Proses</button>
 
@@ -131,13 +171,18 @@
 
         function jalankanFungsi() {
             var kalimatInput = document.getElementById("kalimatInput").value;
-            var pilihanFungsi = document.getElementById("pilihanFungsi").value;
+            var indoumandanaRadio = document.querySelector('input[name="fav_language"][value="indoumandana"]');
+            var umandanaindoRadio = document.querySelector('input[name="fav_language"][value="umandanaindo"]');
             var hasilTerjemahan;
 
-            if (pilihanFungsi === "indoumandana") {
+            if (indoumandanaRadio.checked) {
                 hasilTerjemahan = indoumandana(kalimatInput);
-            } else if (pilihanFungsi === "umandanaindo") {
+            } else if (umandanaindoRadio.checked) {
                 hasilTerjemahan = umandanaindo(kalimatInput);
+            } else {
+                // Tidak ada radio button yang dipilih
+                console.error("Pilih fungsi terlebih dahulu.");
+                return;
             }
             document.getElementById("hasilTerjemahan").innerText = hasilTerjemahan;
         }
