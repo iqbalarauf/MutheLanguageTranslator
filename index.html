@@ -27,21 +27,24 @@
         }
 
         textarea[type=text] {
-            padding: 5px;
+            padding: 12px;
             width: 300px;
             border-radius: 12px;
             border: 1px solid #ccc;
         }
 
         #kalimatInput {
-            padding: 5px;
+            padding: 15px;
             width: 300px;
             height: 100px;
             font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
         }
 
         button {
-            padding: 5px 5px;
+            padding: 15px 15px;
+            font-size: 16px;
+            font-weight: bold;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -55,15 +58,20 @@
         }
 
         #hasilTerjemahan {
-            margin-top: 20px;
-            color: #333;
+            margin-top: 25px;
+            padding: 15px;
+            width: 300px;
+            height: 100px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
         }
 
         header {
-            background-color: #333;
-            color: white;
+            background-color: white;
+            color: black;
             padding: 10px;
             text-align: center;
+            border-bottom: 1px solid black;
         }
 
         h3 {
@@ -72,19 +80,24 @@
 
         nav {
             display: flex;
+            padding-top: 5px;
             justify-content: center;
-            background-color: #555;
+            background-color: white;
+            border-radius: 12px;
         }
 
         nav a {
-            color: white;
+            color: black;
             text-decoration: none;
             padding: 10px;
             margin: 0 10px;
+            border-radius: 12px;
         }
 
         nav a:hover {
             background-color: #777;
+            color: white;
+            border-radius: 12px;
         }
     </style>
 </head>
@@ -100,9 +113,8 @@
     </header>
 
     <h2>Penerjemah Bahasa Umandana</h2>
-    <h5>dibuat oleh <a href="https://x.com/mrtjam7lewat12" target=”_blank”>@MRTJam7Lewat12</a></h5>
 
-    <textarea type="text" id="kalimatInput" placeholder="Masukkan kalimat bahasa Indonesia"></textarea>
+    <textarea type="text" id="kalimatInput" placeholder="Masukkan kalimat"></textarea>
     <br><br>
     
     <form>
@@ -115,7 +127,7 @@
     <br><br>
     <button onclick="jalankanFungsi()">Proses</button>
 
-    <p id="hasilTerjemahan"></p>
+    <textarea type="text" id="hasilTerjemahan" placeholder="Hasil terjemahan muncul di sini"></textarea>
 
     <script>
         function indoumandana(kalimatInput) {
@@ -138,8 +150,29 @@
                             return kata.slice(0, -2) + 'strengen';
                         }
                         break;
-                    default:
+                    case 'b':
+                    case 'c':
+                    case 'd':
+                    case 'f':
+                    case 'h':
+                    case 'j':
+                    case 'k':
+                    case 'l':
+                    case 'm':
+                    case 'n':
+                    case 'p':
+                    case 'q':
+                    case 'r':
+                    case 's':
+                    case 't':
+                    case 'v':
+                    case 'w':
+                    case 'x':
+                    case 'y':
+                    case 'z':
                         return kata + 'es';
+                    default:
+                        return kata;
                 }
                 return kata;
             });
