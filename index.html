@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penerjemahan Kata</title>
+    <title>Penerjemah Bahasa Umandana</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,7 +13,12 @@
         }
 
         h2 {
-            color: #333;
+            color: #000000;
+        }
+
+        a {
+            text-decoration: none;
+            color: blue;
         }
 
         label {
@@ -20,18 +26,28 @@
             margin-right: 10px;
         }
 
+        textarea[type=text] {
+            padding: 5px;
+            width: 300px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+        }
+
         #kalimatInput {
             padding: 5px;
             width: 300px;
+            height: 100px;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         button {
-            padding: 5px 10px;
+            padding: 5px 5px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 12px;
             cursor: pointer;
+            width: 300px;
         }
 
         button:hover {
@@ -44,32 +60,28 @@
         }
     </style>
 </head>
+
 <body>
 
-    <h2>Penerjemahan Kata</h2>
+    <h2>Penerjemah Bahasa Umandana</h2>
+    <h5>dibuat oleh <a href="https://x.com/mrtjam7lewat12">@MRTJam7Lewat12</a></h5>
 
-    <label for="kalimatInput">Masukkan kalimat:</label>
-    <input type="text" id="kalimatInput" placeholder="Contoh kalimat...">
-
-    <label for="pilihanFungsi">Pilih Fungsi:</label>
-    <select id="pilihanFungsi">
-        <option value="tambahkanKata">Tambahkan Kata</option>
-        <option value="kebalikanKata">Kebalikan Kata</option>
-    </select>
-
+    <textarea type="text" id="kalimatInput" placeholder="Masukkan kalimat bahasa Indonesia"></textarea>
+    <br><br>
+    <input type="radio" id="pilihanFungsi" name="fav_language" value="indoumandana">
+    <label for="pilihanFungsi">Indonesia - Bhs.Umandana</label>
+    <input type="radio" id="pilihanFungsi" name="fav_language" value="umandanaindo">
+    <label for="pilihanFungsi">Bhs.Umandana - Indonesia</label>
+    <br><br>
     <button onclick="jalankanFungsi()">Proses</button>
 
     <p id="hasilTerjemahan"></p>
 
     <script>
-        function tambahkanKata(kalimatInput) {
-            // Memisahkan kalimat menjadi array kata
+        function indoumandana(kalimatInput) {
             var kataArray = kalimatInput.split(" ");
-
-            // Menambahkan kata sesuai dengan aturan
             var kataHasil = kataArray.map(function (kata) {
                 var akhiran = kata.slice(-1);
-
                 switch (akhiran) {
                     case 'a':
                         return kata + 'iden';
@@ -83,36 +95,37 @@
                         return kata + 'pro';
                     case 'g':
                         if (kata.slice(-2) === 'ng') {
-                            return kata + ' strengen';
+                            return kata.slice(0, -2) + 'strengen';
                         }
                         break;
                     default:
-                        // Jika berakhiran konsonan, tambahkan "es"
                         return kata + 'es';
                 }
-
-                // Jika tidak ada aturan yang cocok, kembalikan kata aslinya
                 return kata;
             });
-
-            // Menggabungkan kembali array kata menjadi kalimat
             var kalimatHasil = kataHasil.join(" ");
 
             return kalimatHasil;
         }
 
-        function kebalikanKata(kalimatInput) {
-            // Memisahkan kalimat menjadi array kata
+        function umandanaindo(kalimatInput) {
             var kataArray = kalimatInput.split(" ");
-
-            // Membalikkan setiap kata
             var kataHasil = kataArray.map(function (kata) {
-                return kata.split('').reverse().join('');
+                if (kata.length > 1) {
+                    if (kata.endsWith('es')) {
+                        return kata.slice(0, -2);
+                    } else if (kata.endsWith('pri') || kata.endsWith('pre') || kata.endsWith('pro') || kata.endsWith('pru')) {
+                        return kata.slice(0, -3);
+                    } else if (kata.endsWith('iden')) {
+                        return kata.slice(0, -4);
+                    } else if (kata.endsWith('strengen')) {
+                        return kata.slice(0, -8) + 'ng';
+                    }
+                } else {
+                    return kata;
+                }
             });
-
-            // Menggabungkan kembali array kata menjadi kalimat
             var kalimatHasil = kataHasil.join(" ");
-
             return kalimatHasil;
         }
 
@@ -121,14 +134,12 @@
             var pilihanFungsi = document.getElementById("pilihanFungsi").value;
             var hasilTerjemahan;
 
-            if (pilihanFungsi === "tambahkanKata") {
-                hasilTerjemahan = tambahkanKata(kalimatInput);
-            } else if (pilihanFungsi === "kebalikanKata") {
-                hasilTerjemahan = kebalikanKata(kalimatInput);
+            if (pilihanFungsi === "indoumandana") {
+                hasilTerjemahan = indoumandana(kalimatInput);
+            } else if (pilihanFungsi === "umandanaindo") {
+                hasilTerjemahan = umandanaindo(kalimatInput);
             }
-
-            // Menampilkan hasil terjemahan
-            document.getElementById("hasilTerjemahan").innerText = "Hasil: " + hasilTerjemahan;
+            document.getElementById("hasilTerjemahan").innerText = hasilTerjemahan;
         }
     </script>
 
