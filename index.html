@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penerjemahan Kata</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        #kalimatInput {
+            padding: 5px;
+            width: 300px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #hasilTerjemahan {
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Penerjemahan Kata</h2>
+
+    <label for="kalimatInput">Masukkan kalimat:</label>
+    <input type="text" id="kalimatInput" placeholder="Contoh kalimat...">
+
+    <label for="pilihanFungsi">Pilih Fungsi:</label>
+    <select id="pilihanFungsi">
+        <option value="tambahkanKata">Tambahkan Kata</option>
+        <option value="kebalikanKata">Kebalikan Kata</option>
+    </select>
+
+    <button onclick="jalankanFungsi()">Proses</button>
+
+    <p id="hasilTerjemahan"></p>
+
+    <script>
+        function tambahkanKata(kalimatInput) {
+            // Memisahkan kalimat menjadi array kata
+            var kataArray = kalimatInput.split(" ");
+
+            // Menambahkan kata sesuai dengan aturan
+            var kataHasil = kataArray.map(function (kata) {
+                var akhiran = kata.slice(-1);
+
+                switch (akhiran) {
+                    case 'a':
+                        return kata + 'iden';
+                    case 'i':
+                        return kata + 'pri';
+                    case 'e':
+                        return kata + 'pre';
+                    case 'u':
+                        return kata + 'pru';
+                    case 'o':
+                        return kata + 'pro';
+                    case 'g':
+                        if (kata.slice(-2) === 'ng') {
+                            return kata + ' strengen';
+                        }
+                        break;
+                    default:
+                        // Jika berakhiran konsonan, tambahkan "es"
+                        return kata + 'es';
+                }
+
+                // Jika tidak ada aturan yang cocok, kembalikan kata aslinya
+                return kata;
+            });
+
+            // Menggabungkan kembali array kata menjadi kalimat
+            var kalimatHasil = kataHasil.join(" ");
+
+            return kalimatHasil;
+        }
+
+        function kebalikanKata(kalimatInput) {
+            // Memisahkan kalimat menjadi array kata
+            var kataArray = kalimatInput.split(" ");
+
+            // Membalikkan setiap kata
+            var kataHasil = kataArray.map(function (kata) {
+                return kata.split('').reverse().join('');
+            });
+
+            // Menggabungkan kembali array kata menjadi kalimat
+            var kalimatHasil = kataHasil.join(" ");
+
+            return kalimatHasil;
+        }
+
+        function jalankanFungsi() {
+            var kalimatInput = document.getElementById("kalimatInput").value;
+            var pilihanFungsi = document.getElementById("pilihanFungsi").value;
+            var hasilTerjemahan;
+
+            if (pilihanFungsi === "tambahkanKata") {
+                hasilTerjemahan = tambahkanKata(kalimatInput);
+            } else if (pilihanFungsi === "kebalikanKata") {
+                hasilTerjemahan = kebalikanKata(kalimatInput);
+            }
+
+            // Menampilkan hasil terjemahan
+            document.getElementById("hasilTerjemahan").innerText = "Hasil: " + hasilTerjemahan;
+        }
+    </script>
+
+</body>
+</html>
