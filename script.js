@@ -155,5 +155,5 @@ function salinteks(){
     copyText.select();
     copyText.setSelectionRange(0, 99999)
     document.execCommand("copy");
-    alert("Teks berhasil disalin: " + copyText.value);
+    alert("Teks berhasil disalin");
 }
