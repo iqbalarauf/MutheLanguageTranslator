@@ -40,12 +40,12 @@ function pisahSukuKata(kata) {
 
 function isKonsonan(huruf) {
     var konsonan = 'bcdfghjklmnpqrstvwxyz';
-    return konsonan.includes(huruf.toLowerCase());
+    return konsonan.includes(huruf);
 }
 
 function isVokal(huruf) {
     var vokal = 'aeiou';
-    return vokal.includes(huruf.toLowerCase());
+    return vokal.includes(huruf);
 }
 
 function tambahkanKata(kata) {
